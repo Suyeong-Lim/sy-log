@@ -22,9 +22,10 @@ const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
             className={`rounded-3xl`}
           />
           <span
-            className={`absolute top-12 font-extrabold italic text-white text-5xl md:text-9xl text flex justify-center w-full drop-shadow-lg`}
+            className={` absolute top-12 font-extrabold italic text-white text-6xl md:text-6xl text flex justify-center w-full drop-shadow-lg`}
           >
-            {metadata.title}
+            towards <br />
+            conceived reality
           </span>
         </div>
         <RecentPosts posts={posts} />

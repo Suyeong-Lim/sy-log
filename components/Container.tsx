@@ -3,6 +3,8 @@ import Head from "next/head";
 import Image from "next/image";
 import Nav from "./Nav";
 import metadata from "../data/metadata";
+import Link from "next/link";
+import navlinks from "data/navlinks";
 
 const Container = (props) => {
   const meta = {
@@ -22,17 +24,21 @@ const Container = (props) => {
         className={`w-full max-w-3xl flex flex-row justify-between items-center my-1`}
       >
         <div className={`flex flex-row items-center`}>
-          <Image
-            src={`/static/logo.png`}
-            alt="로고"
-            width={40}
-            height={40}
-            objectFit={`cover`}
-            className={`rounded-full`}
-          />
-          <span className={`mx-2 font-extralight text-lg`}>
-            {metadata.title}
-          </span>
+          <Link href={navlinks[0].link} passHref>
+            <a className={`flex items-center`}>
+              <Image
+                src={`/static/logo.jpeg`}
+                alt="logo"
+                width={40}
+                height={40}
+                objectFit={`cover`}
+                className={`rounded-full`}
+              />
+              <span className={`mx-2 font-medium text-lg`}>
+                {metadata.author}
+              </span>
+            </a>
+          </Link>
         </div>
         <Nav />
       </header>
