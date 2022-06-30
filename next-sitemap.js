@@ -1,4 +1,5 @@
 module.exports = {
-  siteUrl: "https://example.com",
+  siteUrl: "https://sy-log.vercel.app",
   generateRobotsTxt: true,
+  sitemapSize: 7000,
 };
