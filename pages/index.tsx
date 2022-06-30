@@ -1,11 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { InferGetStaticPropsType } from "next";
 import Container from "../components/Container";
 import RecentPosts from "../components/RecentPosts";
 import metadata from "../data/metadata";
+import { allPosts } from "contentlayer/generated";
 
-const Home: NextPage = () => {
+const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Container>
       <div className={`my-5 w-full`}>
@@ -25,10 +27,21 @@ const Home: NextPage = () => {
             {metadata.title}
           </span>
         </div>
-        <RecentPosts />
+        <RecentPosts posts={posts} />
       </div>
     </Container>
   );
+};
+
+export const getStaticProps = async () => {
+  const posts = allPosts.sort(
+    (a, b) => Number(new Date(b.date)) - Number(new Date(a.date))
+  );
+  return {
+    props: {
+      posts,
+    },
+  };
 };
 
 export default Home;
