@@ -2,6 +2,7 @@ import BlogPost from "../components/BlogPost";
 import Container from "../components/Container";
 import { allBlogs } from "contentlayer/generated";
 import { InferGetStaticPropsType } from "next";
+import { compareDesc, format, parseISO } from "date-fns";
 
 const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -22,9 +23,9 @@ const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
 };
 
 export const getStaticProps = async () => {
-  const posts = allBlogs.sort(
-    (a, b) => Number(new Date(b.date)) - Number(new Date(a.date))
-  );
+  const posts = allBlogs.sort((a, b) => {
+    return compareDesc(new Date(a.date), new Date(b.date));
+  });
 
   return {
     props: {
