@@ -5,7 +5,7 @@ import { InferGetStaticPropsType } from "next";
 import Container from "../components/Container";
 import RecentPosts from "../components/RecentPosts";
 import metadata from "../data/metadata";
-import { allPosts } from "contentlayer/generated";
+import { allBlogs } from "contentlayer/generated";
 
 const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -35,7 +35,7 @@ const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
 };
 
 export const getStaticProps = async () => {
-  const posts = allPosts.sort(
+  const posts = allBlogs.sort(
     (a, b) => Number(new Date(b.date)) - Number(new Date(a.date))
   );
   return {
