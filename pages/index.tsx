@@ -1,10 +1,7 @@
-import type { NextPage } from "next";
-import Head from "next/head";
 import Image from "next/image";
 import { InferGetStaticPropsType } from "next";
 import Container from "../components/Container";
 import RecentPosts from "../components/RecentPosts";
-import metadata from "../data/metadata";
 import { allBlogs } from "contentlayer/generated";
 
 const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
