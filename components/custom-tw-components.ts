@@ -1,8 +1,10 @@
-import tw from "tailwind-styled-components";
+import Link from "next/link";
+import { css } from "@emotion/react";
+import tw, { styled } from "twin.macro";
 
 //Post
 export const PostTitle = tw.h1`
-    text-cyan-600
+   text-accent
 `;
 //NoteAside Component
 export const NoteAsideContainer = tw.section`
@@ -32,4 +34,10 @@ export const NoteContainer = tw.div`
 export const CategoryTitle = tw.div`
     text-accent
     font-medium
+`;
+
+export const CategoryItemList = tw.div`
+    flex
+    flex-col
+    pl-1
 `;

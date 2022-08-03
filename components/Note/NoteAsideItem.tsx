@@ -15,7 +15,7 @@ const NoteAsideItem = ({ item }: NoteAsideItemProps) => {
       <T.CategoryTitle>{item.title}</T.CategoryTitle>
       <S.CategoryItemList>
         {item.children.map((i) => (
-          <Link key={i.title} href={i.urlPath} passHref>
+          <Link tw="hover:underline" key={i.title} href={i.urlPath} passHref>
             {i.title}
           </Link>
         ))}

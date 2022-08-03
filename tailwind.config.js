@@ -1,3 +1,4 @@
+const colors = require("tailwindcss/colors");
 module.exports = {
   mode: "jit",
   content: [
@@ -28,10 +29,12 @@ module.exports = {
       "5xl": "3rem",
       "6xl": "4rem",
     },
-    colors: ({ colors }) => ({
-      inherit: colors.inherit,
-      current: colors.current,
-      transparent: colors.transparent,
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      white: "#ffffff",
+      gray: colors.gray,
+      cyan: colors.cyan,
       black: colors.black,
       white: colors.white,
       slate: colors.slate,
@@ -64,7 +67,7 @@ module.exports = {
       text_base_20: "#2c3e5020",
       text_base_40: "#2c3e5040",
       text_base_70: "#2c3e5070",
-    }),
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };

@@ -1,9 +1,5 @@
 import styled from "@emotion/styled";
 
-export const CategoryTitle = styled.div`
-  color: var(--accent);
-  font-weight: 700;
-`;
 export const CategoryItemList = styled.div`
   display: flex;
   flex-direction: column;

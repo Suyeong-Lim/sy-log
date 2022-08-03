@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://sy-log.vercel.app</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sy-log.vercel.app/about</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sy-log.vercel.app/blog</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sy-log.vercel.app/blog/algorithm-01</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sy-log.vercel.app/blog/algorithm-02</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sy-log.vercel.app/blog/algorithm-03</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sy-log.vercel.app/blog/algorithm-04</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sy-log.vercel.app/blog/algorithm-05</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sy-log.vercel.app/note/algorithm/2ndTest</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sy-log.vercel.app/note/algorithm</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sy-log.vercel.app/note/algorithm/test</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sy-log.vercel.app/note/til</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sy-log.vercel.app/note/til/tilTest</loc><lastmod>2022-08-03T09:18:25.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app</loc><lastmod>2022-08-03T11:47:16.227Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app/about</loc><lastmod>2022-08-03T11:47:16.228Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app/blog</loc><lastmod>2022-08-03T11:47:16.228Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app/blog/algorithm-01</loc><lastmod>2022-08-03T11:47:16.228Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app/blog/algorithm-02</loc><lastmod>2022-08-03T11:47:16.228Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app/blog/algorithm-03</loc><lastmod>2022-08-03T11:47:16.228Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app/blog/algorithm-04</loc><lastmod>2022-08-03T11:47:16.228Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app/blog/algorithm-05</loc><lastmod>2022-08-03T11:47:16.228Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app/note/algorithm/2ndTest</loc><lastmod>2022-08-03T11:47:16.228Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app/note/algorithm</loc><lastmod>2022-08-03T11:47:16.228Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app/note/algorithm/test</loc><lastmod>2022-08-03T11:47:16.228Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app/note/til</loc><lastmod>2022-08-03T11:47:16.228Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sy-log.vercel.app/note/til/tilTest</loc><lastmod>2022-08-03T11:47:16.228Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
