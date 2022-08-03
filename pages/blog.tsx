@@ -7,7 +7,7 @@ import { compareDesc, format, parseISO } from "date-fns";
 const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Container>
-      <div className={`mt-10 flex flex-col`}>
+      <div className={`mt-3 flex flex-col`}>
         {posts.map((post) => (
           <BlogPost
             date={post.date}

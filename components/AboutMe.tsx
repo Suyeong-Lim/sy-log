@@ -4,7 +4,7 @@ import Image from "next/image";
 const AboutMe = () => {
   return (
     <>
-      <div className={`mt-10 flex flex-col`}>
+      <div className={`mt-3 flex flex-col`}>
         <h2 className={`text-3xl font-semibold mb-10`}>💫 Intoroduce.</h2>
         <div className={`flex flex-row`}>
           <Image
