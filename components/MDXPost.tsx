@@ -1,11 +1,10 @@
 import React from "react";
 import Date from "./Date";
 import { PostTitle } from "components/custom-tw-components";
-import { PostContainer } from "components/custom-tw-components";
 
 const MDXPost = ({ title, date, children }) => {
   return (
-    <div className="ml-5 w-full ">
+    <div className="ml-5 w-full prose ">
       <PostTitle>{title}</PostTitle>
       {date && (
         <Date

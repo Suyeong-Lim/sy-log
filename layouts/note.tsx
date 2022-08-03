@@ -3,7 +3,7 @@ import Container from "components/Container";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import MDXPost from "components/MDXPost";
 import NoteAside from "components/Note/NoteAside";
-import * as S from "components/Note/NoteAsideItem.style";
+import * as T from "components/custom-tw-components";
 
 const note = ({ post, tree }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -17,12 +17,12 @@ const note = ({ post, tree }) => {
 
   return (
     <Container customMeta={customMeta}>
-      <S.NoteContainer>
+      <T.NoteContainer>
         <NoteAside tree={tree} />
         <MDXPost title={post.title} date={post.date}>
           <MDXComponent />
         </MDXPost>
-      </S.NoteContainer>
+      </T.NoteContainer>
     </Container>
   );
 };

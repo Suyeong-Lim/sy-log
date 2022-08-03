@@ -2,20 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Code Blocks */
+pre {
+  background: #2e3440;
+  padding: 1.2rem;
+  border-radius: 1rem;
+  overflow: auto;
+}
+.prose :where(code):not(:where([class~="not-prose"] *)) {
+  color: #14398d;
+  background-color: #f3f5f7;
+  border-radius: 2%;
+  padding: 0.25rem;
+}
+
 code[class*="language-"],
 pre[class*="language-"] {
   color: #f8f8f2;
   background: none;
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
   font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
-  font-size: 1em;
+  font-size: 0.8em;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
   word-break: normal;
-  word-wrap: normal;
-  line-height: 1.5;
+  word-wrap: break-word;
+  line-height: 1.3;
   -moz-tab-size: 4;
   tab-size: 4;
   -webkit-hyphens: none;
@@ -114,6 +126,8 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help;
 }
+/* Code Blocks
+
 
 /*!
   Theme: GitHub Dark
@@ -219,14 +233,15 @@ pre[class*="language-"] {
 /*Colors*/
 
 body {
-  --bg: #f9fafb;
-  --accent: #1e2e6a;
+  --bg: #ffffff;
+  --accent: #3492ca;
+  --primary: #013a3d;
   --accent-border: #2a75e950;
   --shadow: #2c3e5015;
-  --text-base: #2c3e50;
+  --text-base: #23282d;
   --text-base-20: #2c3e5020;
   --text-base-40: #2c3e5040;
-  --text-base-70: #2c3e5070;
+  --text-base-70: #23282da8;
   --icon-color: #2c3e5070;
   --border-color: #00000016;
   --hover-base: #edf1f3;
@@ -234,7 +249,7 @@ body {
   --toggle-bg: #0101010a;
   --toggle-icon: var(--text-base-70);
   --toggle-border: #dfdfdf4d;
-  --code-block: #eff2f6;
+  --code-block: #ebeced;
   --card-bg: #fff;
   --card-border: #ececf3;
   --mdx-border: #dfe2e5;
