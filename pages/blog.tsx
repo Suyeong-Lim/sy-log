@@ -13,6 +13,7 @@ const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
             date={post.date}
             title={post.title}
             des={post.description}
+            tags={post.tags}
             slug={post.slug}
             key={post._id}
           />

@@ -14,7 +14,7 @@ const BlogLayout = ({ post }) => {
 
   return (
     <Container customMeta={customMeta}>
-      <MDXPost title={post.title} date={post.date}>
+      <MDXPost title={post.title} date={post.date} tags={post.tags}>
         <MDXComponent />
       </MDXPost>
     </Container>
