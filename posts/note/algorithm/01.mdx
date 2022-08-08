@@ -1,0 +1,170 @@
+---
+title: 소수찾기
+date: 2022-06-21
+description: 프로그래머스 알고리즘 문제
+---
+
+프로그래머스 level2. 완전탐색 소수찾기
+
+[문제링크](https://programmers.co.kr/learn/courses/30/lessons/42839)
+
+### 문제 설명
+
+한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려 합니다.
+
+각 종이 조각에 적힌 숫자가 적힌 문자열 numbers가 주어졌을 때, 종이 조각으로 만들 수 있는 소수가 몇 개인지 return 하도록 solution 함수를 완성해주세요.
+
+### 제한 사항
+
+- numbers는 길이 1 이상 7 이하인 문자열입니다.
+- numbers는 0~9까지 숫자만으로 이루어져 있습니다.
+- "013"은 0, 1, 3 숫자가 적힌 종이 조각이 흩어져있다는 의미입니다.
+
+### 입출력 예
+
+**입출력 예 #1**
+[1, 7]으로는 소수 [7, 17, 71]를 만들 수 있습니다.
+
+**입출력 예 #2**
+[0, 1, 1]으로는 소수 [11, 101]를 만들 수 있습니다.
+
+- 11과 011은 같은 숫자로 취급합니다.
+
+### 분류
+
+- 완전 탐색
+- DFS
+
+# 2. 풀이
+
+> 만들 수 있는 숫자의 모든 경우의 수를 탐색한다.
+> 그 중 소수를 찾아 개수를 센다.
+
+문자열으로 주어지는 numbers 의 조합을 구하고 그 중 소수의 개수를 찾아야 한다.
+
+1. permute 하는 함수를 정의한다.
+   모든 경우의 수를 구한다. 한글자씩 잘라서 조합한다.
+
+2. 소수를 찾는 함수를 정의한다.
+
+자세한 설명
+
+먼저 solution 함수의 경우.
+주어진 numbers의 길이 인덱스를 활용하여 경우의 수를 구하는 permute함수를 생각할 수있다.
+
+```JS
+function solution(numbers) {
+const result = new Set();
+
+for (let n = 1; n <= numbers.length; n++) {
+
+console.log(n, "인덱스 개를 뽑아서 조합하는 함수를 numbers 의 길이만큼 반복한다.");
+
+for (const e of permute(numbers, n)) {
+ //"결과 값 e를 result 변수에 넣는다."
+ result.add(e);
+}}
+```
+
+permute 함수의 경우.
+
+1. 만약 n이 1인 즉, 1개를 뽑는 경우라면 중복값을 제거 한 후 spread 연산자로 쪼개서 반환해준다.
+2. 여러 개를 고르는 경우에는 재귀적으로 함수를 호출하여 numbers.length 만큼의 수행을 반복하며
+   글자를 자르고 조합하는 작업을 반복한다.
+   ![[Pasted image 20220620161448.png || 200]]
+   이런식으로
+
+[ 17, 11 , 71 , 11, 17 ] 의 조합이 나와야 하기 때문에,
+`numbers.slice(0, i) + numbers.slice(i + 1)` 를 사용하여 조합해 준다. ^7ae539
+
+( permute 의 두번째 인자는 n-1이 되어야 하는데, 이는 재귀의 패턴으로
+n개를 고르는 문제가 있을 시 하나를 빼서 맨 앞에 고정해놓고 나머지 n-1 을 골라 뒤에 붙이게 되므로
+늘 n-1 로 작아지는 패턴을 가지고 있다. n=1이 되면 재귀가 멈춘다. ) ^81044b
+
+```JS
+function permute(numbers, n) {
+
+const result = new Set();
+
+
+if (n === 1) {
+
+return new Set([...numbers]);
+
+}
+
+for (let i = 0; i < numbers.length; i++) {
+
+console.log(i, "번 loop");
+
+for (const e of permute(
+
+numbers.slice(0, i) + numbers.slice(i + 1),
+
+n - 1
+
+)) {
+
+//숫자를 만들어줌
+
+console.log("numbers[i]+e", numbers[i] + e);
+
+result.add(numbers[i] + e); //result = [17,11,71]
+
+}}
+
+return result;
+
+}
+```
+
+마지막으로 소수를 구하는 isPrime 함수를 정의해보자.
+(소수 : 1보다 큰 자연수 중 1과 자기 자신만을 약수로 갖는 양의 정수. 1은 소수가 아님.)
+
+1. num이 1이면 소수가 아니다. num이 2면 소수다.
+2. 1,0 으로 나누면 모든 값이 1로 나눠지고 0은 0이 되니까 2부터 시작한다.
+3. num을 i 로 나눴을때 나누어 떨어지면 false, 나누어 떨어지지 않으면 true.
+
+```JS
+function isPrime(num) {
+
+if (num === 1) return false;
+
+if (num === 2) return true;
+
+
+
+for (let i = 2; i <= Math.floor(Math.sqrt(num)); i++) {
+
+if (num % i === 0) {
+
+return false;
+
+}}
+
+return true;
+
+}
+```
+
+다시 solution 함수로 돌아가서 두 함수를 활용하여 최종 값을 구해보자.
+
+```JS
+function solution(numbers) {
+const result = new Set();
+
+for (let n = 1; n <= numbers.length; n++) {
+
+for (const e of permute(numbers, n)) {
+
+result.add(e);
+
+}}
+
+return [...result].filter((n) => n > 1 && isPrime(n)).length;
+
+}
+```
+
+구해준 result 값을 filter 해주기 위해 spread 연산자를 사용해주고 1이상, prime 값을 통과한 값들을 구해준 후
+length 를 구하면 조건에 맞는 소수의 갯수를 구해 줄 수있다.
