@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { ThemeProvider } from "next-themes";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 
@@ -8,7 +9,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="shortcut icon" href="/static/favicon.ico" />
       </Head>
-      <Component {...pageProps} />
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }

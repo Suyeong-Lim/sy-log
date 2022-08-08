@@ -10,7 +10,7 @@ export const CategoryItemList = styled.div`
     padding: 0.25rem;
     &:hover {
       opacity: 1;
-      background: var(--hover-base);
+      background: var(--secondary2-hover);
     }
   }
 `;

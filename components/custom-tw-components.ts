@@ -1,10 +1,12 @@
-import Link from "next/link";
 import { css } from "@emotion/react";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 
 //Post
 export const PostTitle = tw.h1`
-   text-accent
+text-text_base
+text-3xl
+font-bold
+
 `;
 //NoteAside Component
 export const NoteAsideContainer = tw.section`
@@ -32,8 +34,9 @@ export const NoteContainer = tw.div`
 `;
 
 export const CategoryTitle = tw.div`
-    text-accent
-    font-medium
+    text-text_base
+    font-bold
+
 `;
 
 export const CategoryItemList = tw.div`

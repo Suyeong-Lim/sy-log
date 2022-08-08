@@ -13,7 +13,13 @@ export const Blog = defineDocumentType(() => ({
     title: { type: "string", required: true },
     description: { type: "string", required: false },
     date: { type: "date", required: true },
-    tags: { type: "string", required: false },
+    image: { type: "string", required: false },
+    tags: {
+      type: "list",
+      required: false,
+      of: { type: "string" },
+      default: [],
+    },
   },
 
   computedFields: {

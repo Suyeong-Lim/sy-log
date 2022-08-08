@@ -29,7 +29,8 @@
     "**/*.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".contentlayer/generated"
+    ".contentlayer/generated",
+    "custom-next-env.d.ts"
   ],
   "exclude": ["node_modules"]
 }

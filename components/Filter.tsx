@@ -37,7 +37,7 @@ p-4
 mt-6
 
 rounded-lg
-bg-bg_gray
+bg-text_gray_30
 `;
 
 const TagHd = tw.p`

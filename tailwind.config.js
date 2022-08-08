@@ -60,6 +60,7 @@ module.exports = {
       pink: colors.pink,
       rose: colors.rose,
       bg: "#f5efef",
+      bg_gray: "#F6F6F6",
       accent: "#3492ca",
       accentborder: "#2a75e950",
       primary: "#8ABED4",

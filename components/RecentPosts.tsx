@@ -1,21 +1,27 @@
 import React from "react";
 import Link from "next/link";
 
-import tw, { styled } from "twin.macro";
+import tw, { styled, css } from "twin.macro";
 import Date from "./Date";
 
 const RecentPosts = ({ posts }) => {
+  const postCount = posts.length;
   return (
     <section className={`mt-8 p-4`}>
-      <h1 className={`text-3xl font-medium`}>Latest Article</h1>
+      <div className={`text-3xl font-medium`}>
+        <span>Latest Article</span> <Count>({postCount})</Count>
+      </div>
+
       <PostSection className={`flex flex-col`}>
         {posts.map((post) => (
           <Link key={post._id} href={`/blog/${post.slug}`} passHref>
-            <a className="mt-5">
-              <PostTitle>{post.title}</PostTitle>
-              <PostDescription>{post.description}</PostDescription>
-              <Date dateTime={post.date} />
-            </a>
+            <HoverPost className="mt-5 hover:-translate-x-1.5">
+              <div>
+                <PostTitle>{post.title}</PostTitle>
+                <PostDescription>{post.description}</PostDescription>
+                <Date dateTime={post.date} />
+              </div>
+            </HoverPost>
           </Link>
         ))}
       </PostSection>
@@ -23,6 +29,12 @@ const RecentPosts = ({ posts }) => {
   );
 };
 
+const Count = tw.span`
+font-medium
+text-base
+text-text_till
+ml-2
+`;
 const PostSection = tw.section`
 mt-2
 `;
@@ -38,4 +50,16 @@ font-light
 text-text_till
 mb-3
 `;
+
+const RecentPost = tw.div`text-accent cursor-pointer`;
+
+const HoverPost = styled(RecentPost)`
+  transition: 0.2s ease;
+  &:hover {
+    div {
+      ${tw`transition duration-100 hover:animate-pulse text-accent`}
+    }
+  }
+`;
+
 export default RecentPosts;

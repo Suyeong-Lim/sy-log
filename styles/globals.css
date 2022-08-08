@@ -2,17 +2,88 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Pretendard, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Theme Color */
+:root {
+  /* Your default theme */
+  --background: #e2e2e2;
+  --foreground: #242527;
+}
+
+[data-theme="dark"] {
+  --background: #242527;
+  --foreground: #e2e2e2;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 900;
+  src: url("/styles/font/Pretendard-Black.woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 800;
+  src: url("/styles/font/Pretendard-ExtraBold.woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 700;
+  src: url("/styles/font/Pretendard-Bold.woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 600;
+  src: url("/styles/font/Pretendard-SemiBold.woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 500;
+  src: url("/styles/font/Pretendard-Medium.woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 400;
+  src: url("/styles/font/Pretendard-Regular.woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 300;
+  src: url("/styles/font/Pretendard-Thin.woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 200;
+  src: url("/styles/font/Pretendard-Light.woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 100;
+  src: url("/styles/font/Pretendard-ExtraLight.woff");
+}
+
 pre {
   background: #2e3440;
   padding: 1.2rem;
   border-radius: 1rem;
   overflow: auto;
 }
+
 .prose :where(code):not(:where([class~="not-prose"] *)) {
-  color: #14398d;
-  background-color: #f3f5f7;
-  border-radius: 2%;
-  padding: 0.25rem;
+  color: var(--primary2);
+  background-color: var(--text-base);
+  border-radius: 4px;
+  font-weight: 200;
+  padding: 0.15rem;
 }
 
 code[class*="language-"],
@@ -255,4 +326,12 @@ body {
   --mdx-border: #dfe2e5;
   --mdx-icon-color: #2c3e5070;
   --mdx-icon-bg: #dfdfdf4d;
+  --accent2: #3492ca;
+  --primary2: #8abed4;
+  --secondary2: #fca19f;
+  --secondary2-hover: #fdc4c3;
+  --text_base: #242527;
+  --text_base_20: #2c3e5020;
+  --text_base_40: #2c3e5040;
+  --text_base_70: #2c3e5070;
 }
