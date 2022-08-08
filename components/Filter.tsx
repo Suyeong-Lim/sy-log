@@ -1,23 +1,17 @@
-import React, { useState } from "react";
-import Badge from "./Badge";
-import tw, { styled } from "twin.macro";
+import React from "react";
+import tw from "twin.macro";
 
-const Filter = ({
-  category,
-  clickCategory,
-
-  selectedFilter,
-}) => {
+const Filter = ({ category, clickCategory, selectedFilter }) => {
   const clickBadge = (category) => {
     clickCategory(category);
   };
 
   return (
     <>
-      <div>
-        <p className={`font-bold text-medium text-text_base`}>Tags</p>
-        <hr className={`border-2 border-text_base w-40 mt-2 mb-2`} />
-        <div>
+      <FilterSection>
+        <TagHd>Tags</TagHd>
+        <hr className={`border-2 border-accent w-40 mt-2 mb-2`} />
+        <FilterContainer>
           {category.map((category) => {
             const active = selectedFilter.includes(category);
             return (
@@ -25,32 +19,53 @@ const Filter = ({
                 onClick={() => clickBadge(category)}
                 key={category}
                 className={`category-filter ${
-                  active
-                    ? " bg-accent text-bg"
-                    : " bg-primary_20 text-text_base_70"
+                  active ? " bg-accent text-bg" : " bg-white text-text_base_70"
                 }`}
               >
                 {category}
               </StyledBadge>
             );
           })}
-        </div>
-      </div>
+        </FilterContainer>
+      </FilterSection>
     </>
   );
 };
 
+const FilterSection = tw.section`
+p-4
+mt-6
+
+rounded-lg
+bg-bg_gray
+`;
+
+const TagHd = tw.p`
+font-normal
+text-2xl
+text-text_gray_30
+`;
+
+const FilterContainer = tw.div`
+flex
+flex-wrap
+gap-3
+mt-5
+max-h-32
+min-h-full
+overflow-scroll
+p-3
+`;
+
 const StyledBadge = tw.span`
+shadow-inner
 inline-flex 
 items-center 
 rounded-lg 
-shadow-inner 
-
-px-4 py-1.5 
-mr-2
+h-8
+px-4 py-2
 text-sm
 leading-4
-
 dark:bg-zinc-800 
 dark:text-zinc-200
 cursor-pointer
