@@ -1,26 +1,41 @@
 import React from "react";
 import Link from "next/link";
-import { compareDesc } from "date-fns";
+
+import tw, { styled } from "twin.macro";
+import Date from "./Date";
 
 const RecentPosts = ({ posts }) => {
-  const recentPost = posts.sort((a, b) => {
-    return compareDesc(new Date(a.date), new Date(b.date));
-  });
   return (
-    <section className={`mt-10`}>
-      <h1 className={`text-3xl font-extrabold`}>최근 게시물</h1>
-      <div className={`flex flex-col`}>
-        {recentPost.slice(0, 5).map((post) => (
+    <section className={`mt-8 p-4`}>
+      <h1 className={`text-3xl font-medium`}>Latest Article</h1>
+      <PostSection className={`flex flex-col`}>
+        {posts.map((post) => (
           <Link key={post._id} href={`/blog/${post.slug}`} passHref>
             <a className="mt-5">
-              <div className={`font-medium text-xl`}>{post.title}</div>
-              <div className={`font-light`}>{post.description}</div>
+              <PostTitle>{post.title}</PostTitle>
+              <PostDescription>{post.description}</PostDescription>
+              <Date dateTime={post.date} />
             </a>
           </Link>
         ))}
-      </div>
+      </PostSection>
     </section>
   );
 };
 
+const PostSection = tw.section`
+mt-2
+`;
+
+const PostTitle = tw.div`
+font-medium
+text-xl
+text-text_gray_30
+`;
+
+const PostDescription = tw.div`
+font-light
+text-text_till
+mb-3
+`;
 export default RecentPosts;
