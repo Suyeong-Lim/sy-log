@@ -69,6 +69,7 @@ module.exports = {
       shadow: "#2c3e5015",
       text_base: "#242527",
       text_till: "#717783",
+      text_gray_10: "#F6F6F6",
       text_gray_20: "#B5B5B5",
       text_gray_30: "#323334",
       text_base_20: "#2a37441f",

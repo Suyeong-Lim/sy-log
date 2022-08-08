@@ -35,9 +35,8 @@ const Filter = ({ category, clickCategory, selectedFilter }) => {
 const FilterSection = tw.section`
 p-4
 mt-6
-
 rounded-lg
-bg-text_gray_30
+bg-text_gray_10
 `;
 
 const TagHd = tw.p`
