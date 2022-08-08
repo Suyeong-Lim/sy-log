@@ -5,17 +5,12 @@ import tw, { styled } from "twin.macro";
 const Filter = ({
   category,
   clickCategory,
-  isActive,
-  setActive,
+
   selectedFilter,
 }) => {
-  const clickTest = (category) => {
+  const clickBadge = (category) => {
     clickCategory(category);
-    setActive(!isActive);
   };
-
-  console.log("category", category);
-  console.log("selected", selectedFilter);
 
   return (
     <>
@@ -27,10 +22,12 @@ const Filter = ({
             const active = selectedFilter.includes(category);
             return (
               <StyledBadge
-                onClick={(e) => clickTest(category)}
+                onClick={() => clickBadge(category)}
                 key={category}
                 className={`category-filter ${
-                  active ? " bg-primary" : " bg-bg"
+                  active
+                    ? " bg-accent text-bg"
+                    : " bg-primary_20 text-text_base_70"
                 }`}
               >
                 {category}
@@ -53,7 +50,7 @@ px-4 py-1.5
 mr-2
 text-sm
 leading-4
-text-text_base
+
 dark:bg-zinc-800 
 dark:text-zinc-200
 cursor-pointer

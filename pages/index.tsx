@@ -10,31 +10,23 @@ const Home = ({
   posts,
   category,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log(category);
-
   const [pageposts, setPagePosts] = useState(posts);
-  const [currentCategory, setCurruntCategory] = useState(category);
-  const [isActive, setActive] = useState(false);
 
-  const postState = {
-    currentCategories: currentCategory,
-    posts: pageposts,
-    filteredPosts: posts,
-  };
-
-  const filterPosts = (clickedCategory) => {
-    const { posts, currentCategories } = postState;
-
-    const filteredPosts = posts.filter((post) =>
-      post.tags.includes(clickedCategory)
-    );
-
-    setPagePosts(filteredPosts);
-  };
+  const [selectedFilter, setSelectedFilter] = useState([]);
 
   const clickCategory = (clickedCategory) => {
-    filterPosts(clickedCategory);
+    const selectedFilterList = selectedFilter.includes(clickedCategory)
+      ? selectedFilter.filter((selected) => selected !== clickedCategory)
+      : [...selectedFilter, clickedCategory];
+
+    setSelectedFilter(selectedFilterList);
   };
+
+  const filterData = pageposts.filter((post) =>
+    selectedFilter.every((item) => post.tags.includes(item))
+  );
+
+  const postList = filterData.length !== 0 ? filterData : [];
 
   return (
     <Container>
@@ -56,8 +48,12 @@ const Home = ({
             conceived reality
           </span>
         </div>
-        <Filter category={category} clickCategory={clickCategory} />
-        <RecentPosts posts={pageposts} />
+        <Filter
+          category={category}
+          clickCategory={clickCategory}
+          selectedFilter={selectedFilter}
+        />
+        <RecentPosts posts={postList} />
       </div>
     </Container>
   );
