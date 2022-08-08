@@ -1,10 +1,41 @@
+import { useState } from "react";
 import Image from "next/image";
 import { InferGetStaticPropsType } from "next";
-import Container from "../components/Container";
-import RecentPosts from "../components/RecentPosts";
+import Container from "components/Container";
+import RecentPosts from "components/RecentPosts";
 import { allBlogs } from "contentlayer/generated";
+import Filter from "components/Filter";
 
-const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home = ({
+  posts,
+  category,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  console.log(category);
+
+  const [pageposts, setPagePosts] = useState(posts);
+  const [currentCategory, setCurruntCategory] = useState(category);
+  const [isActive, setActive] = useState(false);
+
+  const postState = {
+    currentCategories: currentCategory,
+    posts: pageposts,
+    filteredPosts: posts,
+  };
+
+  const filterPosts = (clickedCategory) => {
+    const { posts, currentCategories } = postState;
+
+    const filteredPosts = posts.filter((post) =>
+      post.tags.includes(clickedCategory)
+    );
+
+    setPagePosts(filteredPosts);
+  };
+
+  const clickCategory = (clickedCategory) => {
+    filterPosts(clickedCategory);
+  };
+
   return (
     <Container>
       <div className={`my-5 w-full`}>
@@ -25,7 +56,8 @@ const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
             conceived reality
           </span>
         </div>
-        <RecentPosts posts={posts} />
+        <Filter category={category} clickCategory={clickCategory} />
+        <RecentPosts posts={pageposts} />
       </div>
     </Container>
   );
@@ -35,9 +67,15 @@ export const getStaticProps = async () => {
   const posts = allBlogs.sort(
     (a, b) => Number(new Date(b.date)) - Number(new Date(a.date))
   );
+  const category = allBlogs
+    .map((post) => post.tags)
+    .flat()
+    .reduce((ac, v) => (ac.includes(v) ? ac : ac.concat(v)), []);
+
   return {
     props: {
       posts,
+      category,
     },
   };
 };

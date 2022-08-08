@@ -7,10 +7,10 @@ type TagProps = {
   onClick?: () => void;
 };
 const Tag = ({ children, customClass, ...rest }: TagProps) => {
-  return <Badge className={customClass}>#{children}</Badge>;
+  return <StyledTag className={customClass}>#{children}</StyledTag>;
 };
 
-const Badge = tw.span`
+const StyledTag = tw.span`
 inline-flex 
 items-center 
 py-3 
