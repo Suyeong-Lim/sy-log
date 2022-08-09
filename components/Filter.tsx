@@ -10,7 +10,7 @@ const Filter = ({ category, clickCategory, selectedFilter }) => {
     <>
       <FilterSection>
         <TagHd>Tags</TagHd>
-        <hr className={`border-2 border-accent w-40 mt-2 mb-2`} />
+        <hr className={`border-2 border-accent_plus w-40 mt-2 mb-2`} />
         <FilterContainer>
           {category.map((category) => {
             const active = selectedFilter.includes(category);
@@ -18,8 +18,10 @@ const Filter = ({ category, clickCategory, selectedFilter }) => {
               <StyledBadge
                 onClick={() => clickBadge(category)}
                 key={category}
-                className={`category-filter ${
-                  active ? " bg-accent text-bg" : " bg-white text-text_base_70"
+                className={`category-filter hover:bg-primary text-bg ${
+                  active
+                    ? " bg-accent_plus text-bg"
+                    : " bg-white text-text_base_70"
                 }`}
               >
                 {category}
@@ -36,7 +38,7 @@ const FilterSection = tw.section`
 p-4
 mt-6
 rounded-lg
-bg-text_gray_10
+bg-bg
 `;
 
 const TagHd = tw.p`

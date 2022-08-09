@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import metadata from "../data/metadata";
 import Link from "next/link";
 import navlinks from "data/navlinks";
+import Footer from "components/Footer";
 
 const Container = (props) => {
   const meta = {
@@ -47,6 +48,7 @@ const Container = (props) => {
       >
         {props.children}
       </main>
+      <Footer />
     </div>
   );
 };

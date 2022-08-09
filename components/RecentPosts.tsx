@@ -32,7 +32,7 @@ const RecentPosts = ({ posts }) => {
 const Count = tw.span`
 font-medium
 text-base
-text-text_till
+text-accent_plus
 ml-2
 `;
 const PostSection = tw.section`
@@ -40,7 +40,7 @@ mt-2
 `;
 
 const PostTitle = tw.div`
-font-medium
+font-bold
 text-xl
 text-text_gray_30
 `;
