@@ -1,13 +1,19 @@
 import React from "react";
 import Image from "next/image";
-import tw, { styled, css } from "twin.macro";
-import { keyframes } from "@emotion/react";
+import tw from "twin.macro";
 
 const Main = () => {
   return (
     <div className={`relative`}>
-      <StyledBack></StyledBack>
-
+      <Image
+        src={`/static/home.png`}
+        alt="대표 이미지"
+        width={`100%`}
+        height={45}
+        layout={`responsive`}
+        objectFit="cover"
+        className={`rounded-3xl`}
+      />
       <span
         className={` absolute top-12 font-extrabold italic text-white text-6xl md:text-6xl text flex justify-center w-full drop-shadow-lg`}
       >
@@ -20,11 +26,12 @@ const Main = () => {
   );
 };
 
-const StyledBack = tw.div`
+const StyledBG = tw.div`
 h-80
 `;
 
 const StyledTitle = tw.span`
+
 bg-gradient-to-r 
 bg-clip-text 
 text-transparent 

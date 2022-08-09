@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-
 import tw, { styled, css } from "twin.macro";
 import Date from "./Date";
 
