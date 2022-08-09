@@ -9,13 +9,16 @@ const RecentPosts = ({ posts }) => {
   return (
     <section className={`mt-8 p-4`}>
       <div className={`text-3xl font-medium`}>
-        <span>Latest Article</span> <Count>({postCount})</Count>
+        <span className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
+          Latest Article
+        </span>
+        <Count>({postCount})</Count>
       </div>
 
       <PostSection className={`flex flex-col`}>
         {posts.map((post) => (
           <Link key={post._id} href={`/blog/${post.slug}`} passHref>
-            <HoverPost className="mt-5 hover:-translate-x-1.5">
+            <HoverPost className="mt-5 hover:translate-x-1.5">
               <div>
                 <PostTitle>{post.title}</PostTitle>
                 <PostDescription>{post.description}</PostDescription>
@@ -40,7 +43,7 @@ mt-2
 `;
 
 const PostTitle = tw.div`
-font-bold
+font-semibold
 text-xl
 text-text_gray_30
 `;
@@ -57,7 +60,7 @@ const HoverPost = styled(RecentPost)`
   transition: 0.2s ease;
   &:hover {
     div {
-      ${tw`transition duration-100 hover:animate-pulse text-accent`}
+      ${tw`transition duration-100  text-accent_plus`}
     }
   }
 `;

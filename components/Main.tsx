@@ -6,15 +6,8 @@ import { keyframes } from "@emotion/react";
 const Main = () => {
   return (
     <div className={`relative`}>
-      <Image
-        src={`/static/home.png`}
-        alt="대표 이미지"
-        width={`100%`}
-        height={45}
-        layout={`responsive`}
-        objectFit="cover"
-        className={`rounded-3xl`}
-      />
+      <StyledBack></StyledBack>
+
       <span
         className={` absolute top-12 font-extrabold italic text-white text-6xl md:text-6xl text flex justify-center w-full drop-shadow-lg`}
       >
@@ -27,11 +20,15 @@ const Main = () => {
   );
 };
 
+const StyledBack = tw.div`
+h-80
+`;
+
 const StyledTitle = tw.span`
 bg-gradient-to-r 
 bg-clip-text 
 text-transparent 
-from-primary via-white to-white 
+from-primary via-white to-accent_plus 
 animate-gradient
 `;
 

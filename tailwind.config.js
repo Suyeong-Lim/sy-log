@@ -1,6 +1,9 @@
 const colors = require("tailwindcss/colors");
+const { spacing, fontFamily } = require("tailwindcss/defaultTheme");
+
 module.exports = {
   mode: "jit",
+  plugins: [require("@tailwindcss/typography")],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -63,6 +66,7 @@ module.exports = {
       bg_gray: "#F6F6F6",
       accent: "#50A6C9",
       accent_plus: "#5989C3",
+      accent_plus_hover: "#5f8fc9cc",
       accentborder: "#2a75e950",
       primary: "#8ABED4",
       primary_20: "#EDF8FF",
@@ -83,7 +87,7 @@ module.exports = {
       ping: "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite",
       pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       bounce: "bounce 1s infinite",
-      gradient: "gradient 4s linear infinite",
+      gradient: "gradient 7s linear infinite",
     },
     keyframes: {
       spin: {
@@ -118,7 +122,7 @@ module.exports = {
           "background-position": "0 50%",
         },
         "50%": {
-          opacity: ".5",
+          opacity: ".9",
           "background-size": "200% 200%",
           "background-position": "100% 50%",
         },

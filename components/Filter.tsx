@@ -8,69 +8,51 @@ const Filter = ({ category, clickCategory, selectedFilter }) => {
 
   return (
     <>
-      <FilterSection>
-        <TagHd>Tags</TagHd>
-        <hr className={`border-2 border-accent_plus w-40 mt-2 mb-2`} />
-        <FilterContainer>
-          {category.map((category) => {
-            const active = selectedFilter.includes(category);
-            return (
-              <StyledBadge
-                onClick={() => clickBadge(category)}
-                key={category}
-                className={`category-filter hover:bg-primary text-bg ${
-                  active
-                    ? " bg-accent_plus text-bg"
-                    : " bg-white text-text_base_70"
-                }`}
-              >
-                {category}
-              </StyledBadge>
-            );
-          })}
-        </FilterContainer>
-      </FilterSection>
+      <FilterContainer>
+        {category.map((category) => {
+          const active = selectedFilter.includes(category);
+          return (
+            <StyledBadge
+              onClick={() => clickBadge(category)}
+              key={category}
+              className={`category-filter hover:bg-accent_plus_hover hover:text-bg ${
+                active
+                  ? " bg-accent_plus text-bg"
+                  : " bg-text_gray_10 text-text_base"
+              }`}
+            >
+              {category}
+            </StyledBadge>
+          );
+        })}
+      </FilterContainer>
     </>
   );
 };
-
-const FilterSection = tw.section`
-p-4
-mt-6
-rounded-lg
-bg-bg
-`;
-
-const TagHd = tw.p`
-font-normal
-text-2xl
-text-text_gray_30
-`;
 
 const FilterContainer = tw.div`
 flex
 flex-wrap
 gap-3
-mt-5
+mt-2
+mb-7
 max-h-32
 min-h-full
-overflow-scroll
-p-3
+overflow-auto
 `;
 
 const StyledBadge = tw.span`
 shadow-inner
 inline-flex 
 items-center 
-rounded-lg 
+rounded
 h-8
-px-4 py-2
+px-5
 text-sm
 leading-4
 dark:bg-zinc-800 
 dark:text-zinc-200
 cursor-pointer
-
 `;
 
 export default Filter;
