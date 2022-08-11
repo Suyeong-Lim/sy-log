@@ -1,0 +1,336 @@
+---
+title: React 스크롤 애니매이션 만들기
+date: 2022-08-11
+tags: ["React", "animation"]
+description: 리액트로 Framer motion 같은 스크롤 애니매이션 만들기
+---
+
+마이너리 웹 구현 중 디자이너분이 스크롤시 이미지 뱃지에
+[토스](https://toss.im/) 사이트와 동일한 애니매이션을 적용하기를 원하셔서 만들게 되었다.
+![토스 웹페이지 사진](/posts/article/toss.png)
+
+먼저 레퍼런스로 주신 토스 사이트를 개발자 도구로 살펴보니 스크롤값에 따라서 opacity 가 변화하는식으로 동작하고 있었다. 따라서, 간단하게 `useRef` 와 `getBoundingClientRect()` 를 사용하여 스크롤 이벤트가 발생할 때마다 각각의 뱃지 컴포넌트의 opacity 를 계산하여 스타일로 넣어주었다.
+
+`getBoundingClientRect()` 메서드는 DomRect 의 요소 크기와 브라우저 뷰 포트에대한 상대적인 위치 정보를 제공하는 객체를 반환하므로 해당 Dom의 `width`, `height`, `left`, `top`, `right`, `bottom`, `x`, `y` 를 알려주기 때문에 해당 메서드를 사용하여 돔 정보를 얻어내고 그에 따라 opacity를 조정해주면 될 것 같았다.
+
+### 처음 시도한 코드
+
+```JS
+useEffect(() => {
+
+const handler = () => {
+
+const y = document.documentElement.scrollTop;
+
+const rect = ref.current?.getBoundingClientRect();
+
+if (!rect) {
+
+return;
+
+}
+
+// const offset = window.innerHeight - rect.height;
+
+if (rect.y > 400) {
+
+setOpacity(0);
+
+}
+
+// console.log("rect.height", rect.height / 2);
+
+setOpacity(rect.y < 0 ? 1 : rect.y > rect.height / 2 ? 0 : rect.y * 0.15);
+
+};
+
+window.addEventListener("scroll", handler);
+
+return () => {
+
+window.removeEventListener("scroll", handler);
+
+};
+
+}, []);
+
+const excelerator = (exel, opacity) => {
+
+return exel / opacity;
+
+};
+
+<S.IcoImg style={{ opacity: Math.min(1, excelerator(1, opacity)) }}>
+
+<img src="/images/section/section3Ico1.png" />
+
+</S.IcoImg>
+
+<S.IcoImg style={{ opacity: Math.min(1, excelerator(10, opacity)) }}>
+
+<img src="/images/section/section3Ico2.png" />
+
+</S.IcoImg>
+
+```
+
+하지만 opacity 값이 정확히 계산되지 않아 애니매이션이 토스 사이트처럼 자연스럽지 않다는 문제가 발생했다.
+
+opacity 가 스크롤 값에 따라 변하기는 하나 원하던 애니매이션 모션은 아니다. 각각의 뱃지 컴포넌트에 가중치가 제대로 들어가지 않았다.
+또한 스크롤위치에 따라서 opacity 가 0 이었다가 1로 변화해야 하는데 이 부분도 제대로 동작하지 않았다.  
+![minery-animation-before.gif](/posts/article/minery-animation-before.gif)
+
+애니매이션 동작을 구현해본 적이 처음이라.. 다양한 레포를 둘러보니 Framer Motion 을 많이 사용하고 토스 또한 Framer Motion 라이브러리를 사용하여 구현된 듯 했다.
+
+잠깐 Framer Motion 를 사용해볼까 했지만 유료 라이브러리이기 때문에... 스킵하고
+
+인터랙션 웹을 어떻게 구현하는지 좀 배워야겠다 싶어
+인프런의 [애플 웹사이트 인터랙션 클론!](https://www.inflearn.com/course/%ec%95%a0%ed%94%8c-%ec%9b%b9%ec%82%ac%ec%9d%b4%ed%8a%b8-%ec%9d%b8%ed%84%b0%eb%9e%99%ec%85%98-%ed%81%b4%eb%a1%a0/dashboard) 을 보고 적용시켰다.
+
+강의를 보고 이전 코드에선
+
+> 1. 애니매이션 값들이 정확한 가중치로 계산되지 않음
+> 2. 스크롤 위치, 사용자 화면 높이, 섹션의 스크롤 위치 등을 고려하지 않음
+
+과 같은 문제로 인해 정확한 애니매이션이 동작하지 않고 있음을 알게 되었다.
+
+강의를 보니 애니매이션 요소에 넣을 값들을 객체로 관리하고 있었고 이를 통해서 가중치를 계산한다는 것을 알 수 있었다. 따라서 모든 값들을 json 객체로 분리했다.
+
+```JS
+export const THIRD_CONTENTS = {
+
+title: "와인을 기록하는 순간, <br/> 어떤 뱃지를 받게 될까요?",
+
+subTitle:
+
+"차곡차곡 쌓이는 와인일기와 함께 <br/> 마이뱃지를 수집하는 재미도 느껴보세요",
+
+imgData: [
+
+{
+
+type: "icon",
+
+img: "/images/section/section3Ico1.png",
+
+width: "140",
+
+height: "180",
+
+info: [0, 1, { start: 0.88, end: 0.9 }],
+
+},
+```
+
+그리고 객체 값들을 가져와서 이미지를 만들어 주었고 motion을 주는 함수들은 커스텀 훅으로 분리했다. 해당 섹션의 Wrapper 에 ref 를 사용하여 사용할 Dom 정보를 가져오고
+IcoImg 의 style 에서 opacity 를 각각 계산해서 부여해주면 된다.
+
+calcValue 함수는 item의 애니매이션 정보와 현재 섹션의 스크롤 위치 값을 받는다.
+
+```JS
+const ThirdSection = () => {
+
+const { title, subTitle, imgData } = THIRD_CONTENTS;
+
+const { content, currentYOffset, calcValue } = useMotion();
+
+
+return (
+
+<Wrapper ref={content}>
+
+<Title dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }} />
+
+<ImgWrapper>
+
+{imgData.map((item, index) => {
+
+return (
+
+<IcoImg
+
+style={{ opacity: calcValue(item.info, currentYOffset) }}
+
+key={index}
+
+>
+
+<Image
+
+src={item.img}
+
+width={+item.width}
+
+height={+item.height}
+
+alt={item.img}
+
+/>
+
+</IcoImg>
+
+);
+
+})}
+
+</ImgWrapper>
+
+<Desc
+
+dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(subTitle) }}
+
+/>
+
+</Wrapper>
+
+);
+
+};
+```
+
+UseMotion 훅
+
+현재 스크롤의 위치, 사용자의 화면 높이, content dom의 시작 위치, content dom의 높이 값을 필요로 한다.
+
+이후
+
+1. 섹션의 스크롤 위치를 구하고
+2. 스크롤 위치가 섹션안에 들어온 경우 현재 섹션을 Active로 설정
+3. 현재 Yoffset이 각 배지의 스크롤시점 안에 들어온 경우 섹션마다 스크롤이 얼마나 되었는지 비율로 계산하여 calcedValue를 구해준다.
+
+### 개선된 코드
+
+```JS
+import { useState, useEffect, useRef } from "react";
+
+
+export const useMotion = () => {
+
+const content = useRef(null);
+
+const [isActive, setIsActive] = useState(false);
+
+const [currentHeight, setCurrentHeight] = useState(0);
+
+const [currentYOffset, setCurrentYOffset] = useState(0);
+
+
+
+useEffect(() => {
+
+window.addEventListener("scroll", handleScroll);
+
+return () => window.removeEventListener("scroll", handleScroll);
+
+}, []);
+
+
+
+const handleScroll = () => {
+
+let scrollTop = document.documentElement.scrollTop; //스크롤 위치
+
+let margin = document.body.clientHeight; //사용자 화면 높이
+
+let currentStart = content.current.offsetTop;
+
+let height = content.current.offsetHeight;
+
+setCurrentHeight(height + 300); //보정 값
+
+
+
+// 섹션의 스크롤 위치 (스크롤에서 prev 빼주기가 안되서 섹션시작점을 뺀 후 화면 높이를 대신 더해줌)
+
+setCurrentYOffset(scrollTop - currentStart + margin);
+
+
+//스크롤 위치가 섹션안에 들어온 경우 현재 섹션을 Active로 설정한다.
+if (scrollTop > currentStart - margin) {
+
+if (!isActive) setIsActive(true);
+
+}
+
+};
+
+
+
+const calcValue = (values, currentYOffset) => {
+
+let calcedValue = 0;
+
+const partScrollStart = values[2].start * currentHeight;
+
+const partScrollEnd = values[2].end * currentHeight;
+
+const partScrollHeight = partScrollEnd - partScrollStart;
+
+const scrollRatio = currentYOffset / currentHeight;
+
+
+// 스크롤이 섹션 안에 들어와있고
+// 현재 Yoffset이 각 배지의 스크롤시점 안에 들어온 경우
+if (isActive === true) {
+
+if (
+
+currentYOffset >= partScrollStart &&
+
+currentYOffset <= partScrollEnd
+
+) {
+//섹션마다 스크롤이 얼마나 되었는지 비율로 계산하여 calcedValue를 구한다.
+// (현재 위치 - 시작점 / 총 높이 ) * 애니매이션 값
+calcedValue =
+
+((currentYOffset - partScrollStart) / partScrollHeight) *
+
+(values[1] - values[0]) +
+
+values[0];
+
+}
+
+// 스크롤 범위가 90% 이상이면 opacity 값을 1 로 설정한다.
+if (scrollRatio > 0.9) {
+
+calcedValue = 1;
+
+}
+
+}
+
+
+
+return calcedValue;
+
+};
+
+
+
+return {
+
+isActive,
+
+content,
+
+currentHeight,
+
+setCurrentHeight,
+
+currentYOffset,
+
+setCurrentYOffset,
+
+calcValue,
+
+};
+
+};
+```
+
+전보다 훨씬 정확한 애니매이션 동작을 구현할 수 있었다.
+클라이언트의 높이도 고려해주었기 때문에 모바일 반응형에서도 잘 동작한다 :>
+
+![minery-animation-after.gif](/posts/article/minery-animation-after.gif)
