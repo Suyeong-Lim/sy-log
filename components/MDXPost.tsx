@@ -12,7 +12,7 @@ type PostProps = {
 
 const MDXPost = ({ title, date, tags, children }: PostProps) => {
   return (
-    <div className="ml-5 w-full prose ">
+    <div className=" mx-auto w-full prose ">
       {tags?.map((tag) => (
         <Tag key={tag}>{tag}</Tag>
       ))}

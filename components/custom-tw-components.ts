@@ -4,10 +4,12 @@ import tw, { styled, css } from "twin.macro";
 export const PostTitle = tw.h1`
 text-text_base
 text-4xl
-font-bold
+font-extrabold
 mt-4
 `;
 
+export const NodeAside = tw.div`
+mr-8`;
 //NoteAside Component
 export const NoteAsideContainer = tw.section`
     w-[100%]

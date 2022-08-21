@@ -40,7 +40,7 @@ flex
 const PostTitle = tw.div`
 mt-2
 font-bold
-text-lg
+text-2xl
 text-text_gray_30
 `;
 

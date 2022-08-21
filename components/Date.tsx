@@ -24,7 +24,7 @@ items-center
 `;
 
 const DateTime = tw.time`
-font-light
+font-medium
 text-sm
 text-text_till
 ml-1

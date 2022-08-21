@@ -1,6 +1,7 @@
 import React from "react";
 import { TreeNode } from "lib/types";
 import NoteAsideItem from "components/Note/NoteAsideItem";
+import * as T from "components/custom-tw-components";
 
 interface NoteAsideProps {
   tree: TreeNode[];
@@ -8,11 +9,11 @@ interface NoteAsideProps {
 
 const NoteAside = ({ tree }: NoteAsideProps) => {
   return (
-    <div>
+    <T.NodeAside>
       {tree.map((tree) => (
         <NoteAsideItem key={tree.title} item={tree} />
       ))}
-    </div>
+    </T.NodeAside>
   );
 };
 
