@@ -12,7 +12,7 @@ const BlogPost = ({ date, title, des, tags, slug }) => {
           <div>
             <PostTitle>{title}</PostTitle>
             <PostDescription
-              className={`font-light text-gray-600 text-base mt-1 mb-1`}
+              className={`font-normal text-gray-600 text-base mt-1 `}
             >
               {des}
             </PostDescription>
@@ -45,10 +45,10 @@ text-text_gray_30
 `;
 
 const PostDescription = tw.div`
-font-light
+font-normal
 text-sm
 text-text_till
-mb-3
+mb-2
 `;
 
 const RecentPost = tw.div`text-accent cursor-pointer`;

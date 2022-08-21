@@ -48,9 +48,9 @@ text-text_gray_30
 `;
 
 const PostDescription = tw.div`
-font-light
+font-normal
 text-text_till
-mb-3
+mb-2
 `;
 
 const RecentPost = tw.div`text-accent cursor-pointer`;

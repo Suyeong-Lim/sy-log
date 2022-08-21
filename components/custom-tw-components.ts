@@ -3,9 +3,9 @@ import tw, { styled, css } from "twin.macro";
 //Post
 export const PostTitle = tw.h1`
 text-text_base
-text-3xl
+text-4xl
 font-bold
-
+mt-4
 `;
 
 //NoteAside Component

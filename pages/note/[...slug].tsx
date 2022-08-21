@@ -2,13 +2,11 @@ import { allNotes, Note } from ".contentlayer/generated";
 import { PathSegment, TreeNode } from "lib/types";
 import { InferGetStaticPropsType } from "next";
 import NoteLayout from "layouts/note";
-import note from "layouts/note";
 
 const NotePostPate = ({
   note,
   tree,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log("??");
   return <NoteLayout post={note} tree={tree} />;
 };
 

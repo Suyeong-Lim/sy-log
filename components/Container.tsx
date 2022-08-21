@@ -45,7 +45,7 @@ const Container = (props) => {
         <Nav />
       </header>
       <main
-        className={`md:container md:mx-md w-full max-w-4xl p-5 items-center`}
+        className={`md:container md:mx-md w-full max-w-3xl p-5 items-center prose`}
       >
         {props.children}
       </main>

@@ -21,7 +21,6 @@ export default function Date({ dateTime, customClass }: DateProps) {
 const Container = tw.div`
 flex 
 items-center
-
 `;
 
 const DateTime = tw.time`

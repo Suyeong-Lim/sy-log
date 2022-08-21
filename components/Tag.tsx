@@ -11,7 +11,6 @@ const Tag = ({ children, customClass, ...rest }: TagProps) => {
 };
 
 const StyledTag = tw.span`
-
 inline-flex 
 items-center 
 py-3 

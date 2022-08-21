@@ -30,36 +30,37 @@ const Blog = ({
   const postList = filterData.length !== 0 ? filterData : [];
   return (
     <Container>
-      <div className="flex flex-col items-start justify-center max-w-3xl mx-auto mb-16">
-        <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
+      <section>
+        <h1 className="mb-4 text-4xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
           Article
         </h1>
         <p className="mb-4 text-gray-600 dark:text-gray-400">
           {`개발, UXUI 등 관심분야의 정리된 글을 작성하고 있습니다. 총 ${posts.length} 개의 글이 작성되었습니다.`}
         </p>
         <TagHd>Tags</TagHd>
-        <hr className={`border-2 border-text_base w-40 mt-2 mb-2`} />
+        <hr className={`border-2 border-gray-600 w-40 mt-1 mb-2`} />
         <Filter
           category={category}
           selectedFilter={selectedFilter}
           clickCategory={clickCategory}
         />
-        <div className={`mt-3 flex flex-col`}>
-          <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-            All Posts
-          </h1>
-          {postList.map((post) => (
-            <BlogPost
-              date={post.date}
-              title={post.title}
-              des={post.description}
-              tags={post.tags}
-              slug={post.slug}
-              key={post._id}
-            />
-          ))}
-        </div>
-      </div>
+      </section>
+      <section className={`mt-3 flex flex-col`}>
+        <h1 className="mb-4 text-2xl font-bold tracking-tight text-gray-600 md:text-5xl dark:text-white mt-5">
+          All Posts
+        </h1>
+
+        {postList.map((post) => (
+          <BlogPost
+            date={post.date}
+            title={post.title}
+            des={post.description}
+            tags={post.tags}
+            slug={post.slug}
+            key={post._id}
+          />
+        ))}
+      </section>
     </Container>
   );
 };
@@ -67,8 +68,9 @@ const Blog = ({
 const TagHd = tw.p`
 font-bold
 text-base
-text-text_gray_30
-mt-7
+text-gray-600
+mb-1
+text-2xl
 `;
 
 export const getStaticProps = async () => {

@@ -78,9 +78,15 @@ pre {
   overflow: auto;
 }
 
+.prose :where(a):not(:where([class~="not-prose"] *)) {
+  color: var(--accent2);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
 .prose :where(code):not(:where([class~="not-prose"] *)) {
-  color: var(--primary2);
-  background-color: var(--text-base);
+  color: var(--text-base);
+  background-color: var(--card-border);
   border-radius: 4px;
   font-weight: 200;
   padding: 0.15rem;
