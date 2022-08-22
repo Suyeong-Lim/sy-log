@@ -104,10 +104,10 @@ pre {
 }
 
 .prose :where(code):not(:where([class~="not-prose"] *)) {
-  color: var(--text-base);
+  color: var(--secondary3);
   background-color: var(--card-border);
   border-radius: 4px;
-  font-weight: 200;
+  font-weight: 600;
   padding: 0.15rem;
 }
 
@@ -354,6 +354,7 @@ body {
   --accent2: #3492ca;
   --primary2: #8abed4;
   --secondary2: #fca19f;
+  --secondary3: #ec6493;
   --secondary2-hover: #fdc4c3;
   --text_base: #242527;
   --text_base_20: #2c3e5020;

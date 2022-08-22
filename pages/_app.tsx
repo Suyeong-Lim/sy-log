@@ -1,17 +1,17 @@
 import Head from "next/head";
-import { ThemeProvider } from "next-themes";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import { DefaultSeo } from "next-seo";
+import SEO from "../next-seo.config";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <DefaultSeo {...SEO} />
       <Head>
         <link rel="shortcut icon" href="/static/favicon.ico" />
       </Head>
-      <ThemeProvider>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <Component {...pageProps} />
     </>
   );
 }

@@ -8,18 +8,10 @@ import navlinks from "data/navlinks";
 import Footer from "components/Footer";
 
 const Container = (props) => {
-  const meta = {
-    title: metadata.title,
-    description: metadata.description,
-    author: metadata.author,
-    ...props.customMeta,
-  };
   return (
     <div className={`w-full flex flex-col items-center p-3`}>
       <Head>
-        <title>{meta.title}</title>
-        <meta content={meta.description} name="description" />
-        <meta property="og:site_name" content={meta.author} />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
 
       <header
@@ -37,7 +29,7 @@ const Container = (props) => {
                 className={`rounded-full`}
               />
               <span className={`mx-2 font-medium text-lg`}>
-                {metadata.author}
+                {metadata.meta.author}
               </span>
             </a>
           </Link>

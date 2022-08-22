@@ -1,9 +1,8 @@
-import { useState } from "react";
+
 import { InferGetStaticPropsType } from "next";
 import Container from "components/Container";
 import RecentPosts from "components/RecentPosts";
 import { allBlogs } from "contentlayer/generated";
-import Filter from "components/Filter";
 import Main from "components/Main";
 
 const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {

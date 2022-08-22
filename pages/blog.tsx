@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { NextSeo } from "next-seo";
+import metadata from "data/metadata";
 import BlogPost from "../components/BlogPost";
 import Container from "../components/Container";
 import { allBlogs } from "contentlayer/generated";
@@ -30,9 +32,15 @@ const Blog = ({
   const postList = filterData.length !== 0 ? filterData : [];
   return (
     <Container>
+      <NextSeo
+        title="Blog"
+        description="개발, UXUI 등 관심분야의 정리된 글을 작성하고 있습니다."
+        canonical={`${metadata.meta.url}/blog`}
+        openGraph={{ url: `${metadata.meta.url}/blog` }}
+      />
       <section>
         <h1 className="mb-4 text-4xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-          Article
+          Blog
         </h1>
         <p className="mb-4 text-gray-600 dark:text-gray-400">
           {`개발, UXUI 등 관심분야의 정리된 글을 작성하고 있습니다. 총 ${posts.length} 개의 글이 작성되었습니다.`}

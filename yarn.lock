@@ -4637,6 +4637,11 @@ next-contentlayer@^0.1.2:
     "@contentlayer/utils" "0.1.2"
     rxjs "^7.1.0"
 
+next-seo@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-5.5.0.tgz#12bdfce60a6ae098f49617357a166c2d44dbc29e"
+  integrity sha512-5ouBHFtx8YrSDW44lj0qIEQ+oMcz6stgoITB+SqHUZbhgizoJsyLmq73gJ0lxtEKpcN8vG2QgRIJfdb8OAPChw==
+
 next-sitemap@^3.1.7:
   version "3.1.7"
   resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-3.1.7.tgz#601e3436ca732f0b8adb00254e0f79f44b8559b4"
