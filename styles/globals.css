@@ -78,6 +78,12 @@ pre {
   overflow: auto;
 }
 
+.prose :where(p):not(:where([class~="not-prose"] *)) {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  line-height: 2;
+}
+
 .prose :where(a):not(:where([class~="not-prose"] *)) {
   color: var(--accent2);
   text-decoration: none;
