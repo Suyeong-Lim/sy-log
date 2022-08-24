@@ -4,6 +4,8 @@ const metadata = {
     title: "Suyeong's Blog ",
     description: "Suyeong's Study blog",
     author: "SuyeongLim",
+    github: "https://github.com/Suyeong-Lim",
+    footerTitle: "Suyeong's Blog",
   },
 };
 
