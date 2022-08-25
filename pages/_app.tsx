@@ -9,6 +9,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <DefaultSeo {...SEO} />
       <Head>
+        <meta
+          name="google-site-verification"
+          content="mtpCkcTYyH51v6yPau9iEwCiZt1INbiJxwk212qmkIk"
+        />
         <link rel="shortcut icon" href="/static/favicon.ico" />
       </Head>
       <Component {...pageProps} />
