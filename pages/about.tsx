@@ -5,9 +5,7 @@ import Container from "../components/Container";
 const About = () => {
   return (
     <Container>
-      <div className={`mt-10 flex flex-col`}>
-        <AboutMe />
-      </div>
+      <AboutMe />
     </Container>
   );
 };

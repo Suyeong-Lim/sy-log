@@ -1,10 +1,11 @@
 import React from "react";
 import Image from "next/image";
+import tw from "twin.macro";
 
 const AboutMe = () => {
   return (
     <>
-      <div className="flex">
+      <StyledContaier>
         <Image
           src={"/static/profileImg.jpeg"}
           alt="avatar"
@@ -13,13 +14,13 @@ const AboutMe = () => {
           className="object-cover"
         />
         <ProfileInfo />
-      </div>
+      </StyledContaier>
     </>
   );
 };
 
 const ProfileInfo = () => (
-  <section className="ml-10">
+  <section className="mt-8 flex-row justify-center items-center ">
     <h1>{`Hi, I'm SY lim 🍅`} </h1>
     <ul>
       <li>Front-End 개발자에요</li>
@@ -41,5 +42,11 @@ const ProfileInfo = () => (
     </ul>
   </section>
 );
+
+const StyledContaier = tw.div`
+desktop:flex
+mobile:flex-row
+mt-10
+`;
 
 export default AboutMe;

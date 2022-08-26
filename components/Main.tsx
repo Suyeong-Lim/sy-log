@@ -5,17 +5,19 @@ import tw from "twin.macro";
 const Main = () => {
   return (
     <div className={`relative`}>
-      <Image
-        src={`/static/home.png`}
-        alt="대표 이미지"
-        width={`100%`}
-        height={45}
-        layout={`responsive`}
-        objectFit="cover"
-        className={`rounded-3xl`}
-      />
+      <div>
+        <Image
+          src={`/static/home.png`}
+          alt="대표 이미지"
+          width={`100%`}
+          height={45}
+          layout={`responsive`}
+          objectFit="cover"
+          className={`rounded-3xl`}
+        />
+      </div>
       <span
-        className={` absolute top-12 font-extrabold italic text-white text-6xl md:text-6xl text flex justify-center w-full drop-shadow-lg`}
+        className={`absolute top-8 font-extrabold italic text-white text flex justify-center w-full drop-shadow-lg`}
       >
         <StyledTitle>
           towards <br />
@@ -26,12 +28,9 @@ const Main = () => {
   );
 };
 
-const StyledBG = tw.div`
-h-80
-`;
-
 const StyledTitle = tw.span`
-
+desktop:text-6xl
+mobile:text-3xl
 bg-gradient-to-r 
 bg-clip-text 
 text-transparent 
