@@ -15,63 +15,39 @@ description: 리액트로 Framer motion 같은 스크롤 애니매이션 만들�
 
 ### 처음 시도한 코드
 
-```JS
+```js
 useEffect(() => {
 
-const handler = () => {
+  const handler = () => {
 
-const y = document.documentElement.scrollTop;
+  const y = document.documentElement.scrollTop;
 
-const rect = ref.current?.getBoundingClientRect();
+  const rect = ref.current?.getBoundingClientRect();
 
-if (!rect) {
+  if (!rect) return;
 
-return;
+  if (rect.y > 400) {
+    setOpacity(0);
+    }
+    setOpacity(rect.y < 0 ? 1 : rect.y > rect.height / 2 ? 0 : rect.y * 0.15);
+  };
 
-}
+  window.addEventListener("scroll", handler);
+    return () => {
+    window.removeEventListener("scroll", handler);
+    };
+  }, []);
 
-// const offset = window.innerHeight - rect.height;
-
-if (rect.y > 400) {
-
-setOpacity(0);
-
-}
-
-// console.log("rect.height", rect.height / 2);
-
-setOpacity(rect.y < 0 ? 1 : rect.y > rect.height / 2 ? 0 : rect.y * 0.15);
-
-};
-
-window.addEventListener("scroll", handler);
-
-return () => {
-
-window.removeEventListener("scroll", handler);
-
-};
-
-}, []);
-
-const excelerator = (exel, opacity) => {
-
-return exel / opacity;
-
-};
+  const excelerator = (exel, opacity) => {
+    return exel / opacity;
+  };
 
 <S.IcoImg style={{ opacity: Math.min(1, excelerator(1, opacity)) }}>
-
-<img src="/images/section/section3Ico1.png" />
-
+  <img src="/images/section/section3Ico1.png" />
+    </S.IcoImg>
+    <S.IcoImg style={{ opacity: Math.min(1, excelerator(10, opacity)) }}>
+  <img src="/images/section/section3Ico2.png" />
 </S.IcoImg>
-
-<S.IcoImg style={{ opacity: Math.min(1, excelerator(10, opacity)) }}>
-
-<img src="/images/section/section3Ico2.png" />
-
-</S.IcoImg>
-
 ```
 
 하지만 opacity 값이 정확히 계산되지 않아 애니매이션이 토스 사이트처럼 자연스럽지 않다는 문제가 발생했다.
@@ -96,7 +72,7 @@ opacity 가 스크롤 값에 따라 변하기는 하나 원하던 애니매이�
 
 강의를 보니 애니매이션 요소에 넣을 값들을 객체로 관리하고 있었고 이를 통해서 가중치를 계산한다는 것을 알 수 있었다. 따라서 모든 값들을 json 객체로 분리했다.
 
-```JS
+```js:data.js
 export const THIRD_CONTENTS = {
 
 title: "와인을 기록하는 순간, <br/> 어떤 뱃지를 받게 될까요?",
@@ -127,64 +103,39 @@ IcoImg 의 style 에서 opacity 를 각각 계산해서 부여해주면 된다.
 
 calcValue 함수는 item의 애니매이션 정보와 현재 섹션의 스크롤 위치 값을 받는다.
 
-```JS
+```js
 const ThirdSection = () => {
+  const { title, subTitle, imgData } = THIRD_CONTENTS;
 
-const { title, subTitle, imgData } = THIRD_CONTENTS;
+  const { content, currentYOffset, calcValue } = useMotion();
 
-const { content, currentYOffset, calcValue } = useMotion();
+  return (
+    <Wrapper ref={content}>
+      <Title dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }} />
 
+      <ImgWrapper>
+        {imgData.map((item, index) => {
+          return (
+            <IcoImg
+              style={{ opacity: calcValue(item.info, currentYOffset) }}
+              key={index}
+            >
+              <Image
+                src={item.img}
+                width={+item.width}
+                height={+item.height}
+                alt={item.img}
+              />
+            </IcoImg>
+          );
+        })}
+      </ImgWrapper>
 
-return (
-
-<Wrapper ref={content}>
-
-<Title dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }} />
-
-<ImgWrapper>
-
-{imgData.map((item, index) => {
-
-return (
-
-<IcoImg
-
-style={{ opacity: calcValue(item.info, currentYOffset) }}
-
-key={index}
-
->
-
-<Image
-
-src={item.img}
-
-width={+item.width}
-
-height={+item.height}
-
-alt={item.img}
-
-/>
-
-</IcoImg>
-
-);
-
-})}
-
-</ImgWrapper>
-
-<Desc
-
-dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(subTitle) }}
-
-/>
-
-</Wrapper>
-
-);
-
+      <Desc
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(subTitle) }}
+      />
+    </Wrapper>
+  );
 };
 ```
 
@@ -200,133 +151,95 @@ UseMotion 훅
 
 ### 개선된 코드
 
-```JS
+```js
 import { useState, useEffect, useRef } from "react";
 
-
 export const useMotion = () => {
+  const content = useRef(null);
 
-const content = useRef(null);
+  const [isActive, setIsActive] = useState(false);
 
-const [isActive, setIsActive] = useState(false);
+  const [currentHeight, setCurrentHeight] = useState(0);
 
-const [currentHeight, setCurrentHeight] = useState(0);
+  const [currentYOffset, setCurrentYOffset] = useState(0);
 
-const [currentYOffset, setCurrentYOffset] = useState(0);
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
 
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
+  const handleScroll = () => {
+    let scrollTop = document.documentElement.scrollTop; //스크롤 위치
 
-useEffect(() => {
+    let margin = document.body.clientHeight; //사용자 화면 높이
 
-window.addEventListener("scroll", handleScroll);
+    let currentStart = content.current.offsetTop;
 
-return () => window.removeEventListener("scroll", handleScroll);
+    let height = content.current.offsetHeight;
 
-}, []);
+    setCurrentHeight(height + 300); //보정 값
 
+    // 섹션의 스크롤 위치 (스크롤에서 prev 빼주기가 안되서 섹션시작점을 뺀 후 화면 높이를 대신 더해줌)
 
+    setCurrentYOffset(scrollTop - currentStart + margin);
 
-const handleScroll = () => {
+    //스크롤 위치가 섹션안에 들어온 경우 현재 섹션을 Active로 설정한다.
+    if (scrollTop > currentStart - margin) {
+      if (!isActive) setIsActive(true);
+    }
+  };
 
-let scrollTop = document.documentElement.scrollTop; //스크롤 위치
+  const calcValue = (values, currentYOffset) => {
+    let calcedValue = 0;
 
-let margin = document.body.clientHeight; //사용자 화면 높이
+    const partScrollStart = values[2].start * currentHeight;
 
-let currentStart = content.current.offsetTop;
+    const partScrollEnd = values[2].end * currentHeight;
 
-let height = content.current.offsetHeight;
+    const partScrollHeight = partScrollEnd - partScrollStart;
 
-setCurrentHeight(height + 300); //보정 값
+    const scrollRatio = currentYOffset / currentHeight;
 
+    // 스크롤이 섹션 안에 들어와있고
+    // 현재 Yoffset이 각 배지의 스크롤시점 안에 들어온 경우
+    if (isActive === true) {
+      if (
+        currentYOffset >= partScrollStart &&
+        currentYOffset <= partScrollEnd
+      ) {
+        //섹션마다 스크롤이 얼마나 되었는지 비율로 계산하여 calcedValue를 구한다.
+        // (현재 위치 - 시작점 / 총 높이 ) * 애니매이션 값
+        calcedValue =
+          ((currentYOffset - partScrollStart) / partScrollHeight) *
+            (values[1] - values[0]) +
+          values[0];
+      }
 
+      // 스크롤 범위가 90% 이상이면 opacity 값을 1 로 설정한다.
+      if (scrollRatio > 0.9) {
+        calcedValue = 1;
+      }
+    }
 
-// 섹션의 스크롤 위치 (스크롤에서 prev 빼주기가 안되서 섹션시작점을 뺀 후 화면 높이를 대신 더해줌)
+    return calcedValue;
+  };
 
-setCurrentYOffset(scrollTop - currentStart + margin);
+  return {
+    isActive,
 
+    content,
 
-//스크롤 위치가 섹션안에 들어온 경우 현재 섹션을 Active로 설정한다.
-if (scrollTop > currentStart - margin) {
+    currentHeight,
 
-if (!isActive) setIsActive(true);
+    setCurrentHeight,
 
-}
+    currentYOffset,
 
-};
+    setCurrentYOffset,
 
-
-
-const calcValue = (values, currentYOffset) => {
-
-let calcedValue = 0;
-
-const partScrollStart = values[2].start * currentHeight;
-
-const partScrollEnd = values[2].end * currentHeight;
-
-const partScrollHeight = partScrollEnd - partScrollStart;
-
-const scrollRatio = currentYOffset / currentHeight;
-
-
-// 스크롤이 섹션 안에 들어와있고
-// 현재 Yoffset이 각 배지의 스크롤시점 안에 들어온 경우
-if (isActive === true) {
-
-if (
-
-currentYOffset >= partScrollStart &&
-
-currentYOffset <= partScrollEnd
-
-) {
-//섹션마다 스크롤이 얼마나 되었는지 비율로 계산하여 calcedValue를 구한다.
-// (현재 위치 - 시작점 / 총 높이 ) * 애니매이션 값
-calcedValue =
-
-((currentYOffset - partScrollStart) / partScrollHeight) *
-
-(values[1] - values[0]) +
-
-values[0];
-
-}
-
-// 스크롤 범위가 90% 이상이면 opacity 값을 1 로 설정한다.
-if (scrollRatio > 0.9) {
-
-calcedValue = 1;
-
-}
-
-}
-
-
-
-return calcedValue;
-
-};
-
-
-
-return {
-
-isActive,
-
-content,
-
-currentHeight,
-
-setCurrentHeight,
-
-currentYOffset,
-
-setCurrentYOffset,
-
-calcValue,
-
-};
-
+    calcValue,
+  };
 };
 ```
 
