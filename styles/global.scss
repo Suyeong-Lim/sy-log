@@ -1,0 +1,69 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "styles/colors.module";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 360px;
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #303335;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: Pretendard, -apple-system, sans-serif;
+}
+
+/*
+ * overriding code block styles in "prism-themes/themes/prism-night-owl.css" 
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  font-size: 0.8rem !important;
+}
+
+.token {
+  font-style: initial !important;
+}
+
+pre {
+  border-radius: 0.5rem;
+}
+
+.rehype-code-title {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  background-color: #0d244a;
+  color: $--white;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+}
+
+.rehype-code-title + pre[class*="language-"] {
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *)) {
+  color: #ec6493;
+  font-weight: 600;
+  font-size: 0.875em;
+}
+
+:not(pre) > code {
+  font-size: 0.85em;
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.25rem;
+}
+
+blockquote {
+  border-left: 6px solid $--secondary;
+  margin: 1rem 0;
+  padding: 0 1rem;
+}
