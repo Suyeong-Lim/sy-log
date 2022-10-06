@@ -1,0 +1,88 @@
+---
+title: 22/October
+date: 2022-10-07
+description: 22/October/TIL
+---
+
+[회고양식은 여기를 참고](https://ohahohah.com/TIL/Retrospect/everyday5fs.html)
+
+---
+
+## 🐥 Week 1
+
+### 10/7
+
+**그날의 사실 (Facts)**
+1️⃣ 마이너리 웹을 수정했다.
+마이너리 랜딩 페이지 만들때 isomorphic-dompurify 라이브러리를 사용했는데
+JSDom 사용하는 것 때문에 ci 연결한 배포가 오류나서 다 걷어냈다.
+사용한 이유는 텍스트들을 JSON형태로 만들어놨었는데
+컴포넌트 만들때 해당 라이브러리를 사용하니까
+JSON 안에 `<br/>` 태그들을 그대로 쓸 수 있었기 때문이었다..
+근데 ci 에러가 나서 팀원분이 봐주며 조언해 주셨는데 그냥 react compmonent로 감싸서
+만들면 되는 일이었다;;ㅠ 오늘은 그 부분을 전체 수정하여 공용 텍스트 컴포넌트를 다시 만들었고 (+반응형으로)
+AOS 라이브러리 사용하여 애니매이션 효과를 적용시켰다.
+
+아 그리고 삽질하다가 `next.config.js` 에서 svg 불러오는 세팅도 고쳤다.
+계속 도메인 이미지 불러오는 모듈 안에서 웹팩 svg 설정해야 하는 줄 알고 삽질했는데..
+그냥 각각의 module을 작성해주면 되는거였다...(하나의 모듈만 export 해야하는 줄 알았음.)
+
+```ts
+/** @type {import('next').NextConfig} */
+
+module.exports = {
+  reactStrictMode: true,
+  images: {
+    domains: [사용하는 도메인 주소],
+  },
+};
+
+module.exports = {
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"],
+    });
+
+    return config;
+  },
+};
+```
+
+참 쉽죵?
+
+이렇게 해서
+
+```js
+export const ImgLogo = styled(Logo)`
+  width: 4rem;
+  height: 1.8rem;
+  ${media.mobile} {
+    display: none;
+  }
+`;
+```
+
+드디어 스타일 컴포넌트에서 SVG를 바로 사용할 수 있게 되었다.
+그동안 Next에서 SVG를 못가져와서 넘 슬펐는데 휴..해결..애꿎은 domain 이미지 설정만 탓하구 있었구나ㅎㅎ
+이거랑 next 링크 사용하는 공통 컴포넌트도 만들었는데, 이는 내일 코드에 반영할 예정
+
+**느낌 (Feeling)**
+
+오늘도 삽질을 많이 한 것 같다.
+목표를 정확히 정하는게 개발의 시작인 것 같다. 이것 없이는 코딩이 아니라 그냥 키보드에 손 올린 시간이 되는듯.
+알고있는데 쉽지 않네 TDD에 대한 호기심과 필요성이 좀 많이 느껴진다. 진짜 TDD 공부해야겠다.
+
+**배운점 (Findings)**
+
+웹팩 강의를 보면 좋겠다.
+오늘은 넘 늦었고 내일 봐야지
+볼 강의는 [이거](https://www.youtube.com/watch?v=NGVc-zw2FG8&feature=emb_title)
+
+**미래의 행동계획 (Future)**
+
+정확한 목표와 시간을 정하구 코딩 시작하기
+
+**피드백 (Feedback)**
+
+머리로 대충 생각하지말고 노트에 적자
