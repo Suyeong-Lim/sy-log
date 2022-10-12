@@ -37,8 +37,11 @@ const ProfileInfo = () => (
         하나의 아이디어가 프로덕트가 되기까지의 긴 여정에 몰입하는 것을
         좋아합니다.
       </li>
-      <li>취미로 사진을 찍고 📷 , 식물을 키워요 🌱 </li>
-      <li>요즘은 TDD 와 StoryBook 에 관심을 갖고 있습니다. </li>
+      <li>
+        <a href="https://unsplash.com/@sypic">취미로 사진을 찍고 📷</a> 식물을
+        키워요 🌱
+      </li>
+      {/* <li>요즘은 TDD 와 StoryBook 에 관심을 갖고 있습니다. </li> */}
     </ul>
   </section>
 );
