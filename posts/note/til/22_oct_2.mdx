@@ -1,0 +1,82 @@
+---
+title: 22/October_4
+date: 2022-10-26
+description: 22/October/TIL/week4
+---
+
+---
+
+## 🧐 Week 4
+
+### 10/26
+
+**그날의 사실 (Facts)**
+
+1️⃣ 코드 조금 수정
+
+DM 기능에서 유저가 메시지 보낼때 링크도 같이 전송하는데, 링크는 a 링크로 텍스트 분리하는 코드 수정
+match 함수를 사용하여 정규표현식으로 주소를 반환해 a 태그에 넣어주고 주소가 아닌 텍스트들은 그냥 리턴하도록 했다.
+```TS
+    <p>
+      {words.map((word) => {
+        return word.match(urlRegex) ? (
+          <a href={word} target="_blank">
+            {word}
+          </a>
+        ) : (
+          word + ' '
+        );
+      })}
+    </p>
+```
+
+2️⃣ graphQL 간략히 공부 (공식문서 + 개발 문서 읽으면서 코드 읽음)
+
+GraphQL = 
+RestAPI 의  문제점 over-fetching, under-fetching 을 해결했다.
+
+Rest api 와는 다르게 단일한 endpoint를 가지고 있고 필요한 data 의 scheme 를 정의해서 딱 그것만 요청하고 주고받음 
+data 의 shape 정의하는 것, arguments 전달 형식은 다음과 같다. 
+#### Type 
+```JS
+const typeDefs = gql`
+
+type Tweet{
+    id: ID
+    text:String
+    author: User
+}
+
+type Query {
+    allTweets: [Tweet]
+    tweet(id:ID) :Tweet
+}
+`
+```
+
+allTweets 처럼 모든 값들은 Tweet의 배열로 모든 트윗 값을 요청 가능하며 
+개별 트윗 (tweet) 은 arguments id 를 받아 Tweet 을 반환한다.
+
+#### Mutation Type 
+graphQL에서 post Request 다루는 방법
+
+graphQL에서는 명시적인 mutaion 쿼리를 사용하여 데이터 쓰기를 수행한다,  
+params 보내고 업데이트 후의 새 상태를 가져오는 구문의 예는 다음과 같다. (업데이트 이후 새 상태를 가져온다.)
+
+
+3️⃣ React Native 개발환경 세팅
+
+expo, xcode 로 web, ios 화면 띄워봄 
+프로젝트 전반적인 세팅에 대해 내일 팀원들과 논의해야함
+
+
+**느낌 (Feeling)**
+
+
+**배운점 (Findings)**
+
+읽어볼 것 : [GraphQL Mutation 설계하기](https://fe-developers.kakaoent.com/2022/220113-designing-graphql-mutation/)
+
+**미래의 행동계획 (Future)**
+
+**피드백 (Feedback)**

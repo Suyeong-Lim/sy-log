@@ -19,10 +19,10 @@ const Main = () => {
       <span
         className={`absolute top-8 font-extrabold italic text-white text flex justify-center w-full drop-shadow-lg`}
       >
-        <StyledTitle>
+        {/* <StyledTitle>
           towards <br />
           conceived reality
-        </StyledTitle>
+        </StyledTitle> */}
       </span>
     </div>
   );
